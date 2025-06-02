@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Fox Knows</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #f2f2f2;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    img.logo {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    input, button {
+      font-size: 16px;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #222;
+      color: #fff;
+      border: 1px solid #555;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #d63384;
+    }
+
+    button:hover {
+      background-color: #d63384;
+      cursor: pointer;
+    }
+
+    .msg {
+      margin-top: 15px;
+      color: #d63384;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <img src="me.png" alt="Kitsune Logo" class="logo" />
+  <h2>Find the password</h2>
+
+  <form id="puzzleForm">
+    <input type="password" id="pw" placeholder="Enter password..." required />
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div class="msg" id="failMsg">Nope. Try again.</div>
+
+  <script>
+    document.getElementById("puzzleForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const password = document.getElementById("pw").value.trim();
+      if (password === "K1t$une") {
+        window.location.href = "foxpath.html";
+      } else {
+        document.getElementById("failMsg").style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
