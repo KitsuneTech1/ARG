@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>The Fox Knows</title>
-  <!-- The first piece of the key: K1t -->
+  <title>The Fox's Riddle</title>
   <style>
     body {
       background-color: #0f0f0f;
@@ -16,11 +15,18 @@
       height: 100vh;
       margin: 0;
       text-align: center;
+      padding: 20px;
     }
 
     img.logo {
       width: 120px;
       margin-bottom: 20px;
+    }
+
+    .riddle-text {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      line-height: 1.5;
     }
 
     input, button {
@@ -47,40 +53,36 @@
       color: #d63384;
       display: none;
     }
-
-    /* The second piece of the key: $un */
-    #hidden-clue::before {
-      content: '';
-      display: none;
-    }
   </style>
 </head>
 <body>
   <img src="me.png" alt="Kitsune Logo" class="logo" />
-  <h2>Find the password</h2>
-  <!-- The fox is clever. Are you? -->
+  <h1>A New Challenge Awaits</h1>
+  <p class="riddle-text">
+    The path ahead is veiled, but the wise know that every journey begins with a single step, and every secret can be unveiled with the right shift.
+  </p>
+  <p class="riddle-text">
+    Decrypt this message to proceed:<br>
+    <strong id="cipher-text">IRXQG WKH IR[</strong>
+  </p>
+  <!-- Clue: The shift is the number of letters in "Kitsune" -->
 
-  <form id="puzzleForm">
-    <input type="password" id="pw" placeholder="Enter password..." required data-part3="e" />
+  <form id="riddleForm">
+    <input type="text" id="riddlePw" placeholder="Enter decrypted message..." required />
     <br>
     <button type="submit">Submit</button>
   </form>
 
-  <div class="msg" id="failMsg">Nope. Try again.</div>
+  <div class="msg" id="failMsg">Not quite. The fox is patient.</div>
 
   <script>
-    document.getElementById("puzzleForm").addEventListener("submit", function(e) {
+    document.getElementById("riddleForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      const passwordInput = document.getElementById("pw");
-      const part1 = "K1t"; // From HTML comment
-      const part2 = "$un"; // From CSS comment
-      const part3 = passwordInput.dataset.part3; // From data attribute
+      const enteredMessage = document.getElementById("riddlePw").value.trim().toUpperCase();
+      const correctMessage = "FOUND THE FOX"; // Decrypted message from "IRXQG WKH IRX" with shift 7 (Kitsune has 7 letters)
 
-      const fullPassword = part1 + part2 + part3;
-      const enteredPassword = passwordInput.value.trim();
-
-      if (enteredPassword === fullPassword) {
-        window.location.href = "riddle.html"; // Redirect to the new riddle page
+      if (enteredMessage === correctMessage) {
+        window.location.href = "foxpath.html";
       } else {
         document.getElementById("failMsg").style.display = "block";
       }
